@@ -5,7 +5,6 @@ library(dplyr)
 
 #Read the data
 #---------------------------------------------
-
 X_train <- read.table("./UCI HAR Dataset/train/X_train.txt", quote="\"", comment.char="")
 y_train <- read.table("./UCI HAR Dataset/train/y_train.txt", quote="\"", comment.char="")
 X_test  <- read.table("./UCI HAR Dataset/test/X_test.txt",   quote="\"", comment.char="")
@@ -48,10 +47,8 @@ a=gsub("\\-", "", a)
 
 names(X)<- a
 
-
 # 5.	From the data set in step 4, creates a second, independent tidy data set 
 # with the average of each variable for each activity and each subject.
 #---------------------------------------------------------------
-
 result <- X %>% group_by( subject,activity  ) %>% summarise_each( funs(mean) )
-write.table(result, file = "tidy_data.txt", sep = ",")
+write.table(result, file = "tidy_data.txt", sep = ",", row.name=FALSE)
